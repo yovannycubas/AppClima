@@ -1,6 +1,7 @@
 import os
 import webbrowser
 import threading
+import time
 import requests
 from flask import Flask, render_template, request, redirect, url_for
 from dotenv import load_dotenv
@@ -11,6 +12,10 @@ app = Flask(__name__)
 
 API_KEY = os.getenv("OPENWEATHER_API_KEY", "")
 BASE_URL = "https://api.openweathermap.org/data/2.5/weather"
+
+# Cache structure: { "city_name_lower": { "data": json_dict, "expiry": timestamp } }
+WEATHER_CACHE = {}
+CACHE_DURATION = 600  # 10 minutes
 
 # Map weather icon prefix → CSS theme class
 THEME_MAP = {
@@ -41,6 +46,15 @@ def weather():
     city = request.args.get("city", "").strip()
     if not city:
         return redirect(url_for("index"))
+
+    # ── Check Cache ──
+    city_key = city.lower()
+    now = time.time()
+    if city_key in WEATHER_CACHE:
+        cached_item = WEATHER_CACHE[city_key]
+        if now < cached_item["expiry"]:
+            # Instant return from cache
+            return render_template("weather.html", **cached_item["data"])
 
     params = {
         "q": city,
@@ -91,6 +105,12 @@ def weather():
         "visibility":   round(visibility_m / 1000, 1),  # km
         "clouds":       clouds.get("all", 0),
         "theme":        get_theme(weather_d.get("icon", "01d")),
+    }
+
+    # ── Update Cache ──
+    WEATHER_CACHE[city_key] = {
+        "data": ctx,
+        "expiry": now + CACHE_DURATION
     }
 
     return render_template("weather.html", **ctx)

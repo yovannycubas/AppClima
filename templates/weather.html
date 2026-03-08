@@ -1,0 +1,106 @@
+{% extends "base.html" %}
+
+{% block title %}{{ city }}, {{ country_name }} – ClimaP1{% endblock %}
+
+{% block body_class %}{{ theme }}{% endblock %}
+
+{% block content %}
+<div class="weather-page">
+
+    <!-- ── Header ── -->
+    <header class="weather-header">
+        <a href="/" class="back-link" aria-label="Volver al inicio">
+            <span class="back-arrow">←</span> Nueva búsqueda
+        </a>
+    </header>
+
+    <!-- ── Hero card ── -->
+    <main class="weather-main">
+        <div class="hero-card glass fade-in">
+
+            <!-- City + flag -->
+            <div class="city-row">
+                <div class="city-info">
+                    <h1 class="city-name">{{ city }}</h1>
+                    <p class="city-desc">{{ description }}</p>
+                </div>
+                <img class="country-flag" src="https://flagcdn.com/w80/{{ country_code }}.png"
+                    srcset="https://flagcdn.com/w160/{{ country_code }}.png 2x" alt="Bandera de {{ country_name }}"
+                    onerror="this.style.display='none'" />
+            </div>
+
+            <!-- Weather icon + temperature -->
+            <div class="temp-row">
+                <img class="weather-icon" src="https://openweathermap.org/img/wn/{{ icon }}@2x.png"
+                    alt="{{ description }}" />
+                <div class="temp-display">
+                    <span class="temp-value">{{ temp }}</span>
+                    <span class="temp-unit">°C</span>
+                </div>
+            </div>
+
+            <!-- Divider -->
+            <div class="divider"></div>
+
+            <!-- Stats grid -->
+            <div class="stats-grid">
+
+                <div class="stat-card glass-inner" title="Sensación térmica">
+                    <span class="stat-icon">🌡️</span>
+                    <span class="stat-label">Sensación</span>
+                    <span class="stat-value">{{ feels_like }}°C</span>
+                </div>
+
+                <div class="stat-card glass-inner" title="Temperatura mínima">
+                    <span class="stat-icon">🔽</span>
+                    <span class="stat-label">Mínima</span>
+                    <span class="stat-value">{{ temp_min }}°C</span>
+                </div>
+
+                <div class="stat-card glass-inner" title="Temperatura máxima">
+                    <span class="stat-icon">🔼</span>
+                    <span class="stat-label">Máxima</span>
+                    <span class="stat-value">{{ temp_max }}°C</span>
+                </div>
+
+                <div class="stat-card glass-inner" title="Humedad relativa">
+                    <span class="stat-icon">💧</span>
+                    <span class="stat-label">Humedad</span>
+                    <span class="stat-value">{{ humidity }}%</span>
+                </div>
+
+                <div class="stat-card glass-inner" title="Velocidad del viento">
+                    <span class="stat-icon">💨</span>
+                    <span class="stat-label">Viento</span>
+                    <span class="stat-value">{{ wind_speed }} km/h</span>
+                </div>
+
+                <div class="stat-card glass-inner" title="Presión atmosférica">
+                    <span class="stat-icon">🔵</span>
+                    <span class="stat-label">Presión</span>
+                    <span class="stat-value">{{ pressure }} hPa</span>
+                </div>
+
+                <div class="stat-card glass-inner" title="Visibilidad">
+                    <span class="stat-icon">👁️</span>
+                    <span class="stat-label">Visibilidad</span>
+                    <span class="stat-value">{{ visibility }} km</span>
+                </div>
+
+                <div class="stat-card glass-inner" title="Cobertura de nubes">
+                    <span class="stat-icon">☁️</span>
+                    <span class="stat-label">Nubosidad</span>
+                    <span class="stat-value">{{ clouds }}%</span>
+                </div>
+
+            </div><!-- /stats-grid -->
+        </div><!-- /hero-card -->
+    </main>
+
+    <footer class="weather-footer">
+        <p>Datos provistos por <a href="https://openweathermap.org" target="_blank" rel="noopener">OpenWeatherMap</a>
+        </p>
+    </footer>
+
+</div><!-- /weather-page -->
+{% endblock %}

@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block title %}ClimaP1 – Consulta el Clima Mundial{% endblock %}
+
+{% block body_class %}page-index{% endblock %}
+
+{% block content %}
+<div class="index-bg">
+    <!-- Animated background particles -->
+    <div class="particles">
+        <span></span><span></span><span></span><span></span>
+        <span></span><span></span><span></span><span></span>
+    </div>
+
+    <div class="index-card glass">
+        <div class="index-logo">
+            <span class="logo-icon">🌍</span>
+            <h1 class="logo-title">ClimaP1</h1>
+            <p class="logo-subtitle">Clima actual de cualquier ciudad del mundo</p>
+        </div>
+
+        <form id="search-form" action="/weather" method="GET" autocomplete="off">
+            <div class="search-group">
+                <input id="city-input" type="text" name="city" placeholder="Escribe una ciudad… ej. París, Tokio, Lima"
+                    required autofocus aria-label="Nombre de la ciudad" maxlength="100" />
+                <button id="search-btn" type="submit" aria-label="Buscar clima">
+                    <span class="btn-text">Buscar</span>
+                    <span class="btn-icon">→</span>
+                    <span class="btn-spinner" aria-hidden="true"></span>
+                </button>
+            </div>
+        </form>
+
+        <p class="index-hint">Datos en tiempo real · OpenWeatherMap API</p>
+    </div>
+</div>
+{% endblock %}

@@ -24,7 +24,8 @@ Aplicación web desarrollada con **Flask** que consulta el clima actual de cualq
 | 🌐 Bandera del país | Via flagcdn.com |
 | 🖼️ Ícono oficial | De OpenWeatherMap |
 
-- 🎨 **Tema dinámico** — el fondo y colores cambian según el clima (despejado, nublado, lluvia, tormenta, nieve, niebla)
+- 🎨 **Tema dinámico** — el fondo y colores cambian según el clima (Naranja para despejado, Azul para lluvia, Gris para nublado, Azul claro para nieve)
+- ⚡ **Búsqueda optimizada** — sistema de caché en memoria para resultados instantáneos en búsquedas repetidas
 - ❌ **Página de error amigable** — cuando la ciudad no existe, con botón para volver
 - 🚀 **Auto-abre el navegador** al ejecutar el servidor
 
@@ -120,12 +121,12 @@ El diseño cambia automáticamente según el clima de la ciudad buscada:
 
 | Clima | Tema | Colores |
 |-------|------|---------|
-| ☀️ Despejado | `theme-clear` | Naranja/amarillo cálido |
+| ☀️ Despejado | `theme-clear` | Naranja (#ff8c00) |
 | 🌤️ Pocas nubes | `theme-few-clouds` | Azul cielo |
-| ☁️ Nublado | `theme-cloudy` | Gris oscuro |
-| 🌧️ Lluvia | `theme-rain` | Azul marino |
+| ☁️ Nublado | `theme-cloudy` | Gris (#7f8c8d) |
+| 🌧️ Lluvia | `theme-rain` | Azul (#2980b9) |
 | ⛈️ Tormenta | `theme-storm` | Azul noche / rojo |
-| ❄️ Nieve | `theme-snow` | Blanco / celeste |
+| ❄️ Nieve | `theme-snow` | Azul claro / Cian |
 | 🌫️ Niebla | `theme-mist` | Gris suave |
 
 ---
